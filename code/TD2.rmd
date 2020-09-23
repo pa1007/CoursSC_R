@@ -1,0 +1,142 @@
+---
+title: "TD2 Enquete est sondage"
+author: Paul-Alexandre Fourrière
+date: 18/09/2020
+output: html_notebook
+---
+## Question 1
+```{r}
+do <- read.table("../naissances.txt", header = TRUE)
+head(do)
+```
+# Question 2 :
+
+Types de variables : <br/>
+- qualitative  : HT,UI,SMOKE <br/>
+- quantitative : AGE,LWT,PLT,FVT,BWT,RISQUE
+
+
+# Question 3 :
+## a)
+```{r}
+do$AGE
+```
+## b)
+```{r}
+mean(do$AGE)
+var(do$AGE)
+sd(do$AGE)
+median(do$AGE)
+quantile(do$AGE)
+min(do$AGE)
+max(do$AGE)
+
+```
+## c)
+```{r}
+boxplot(do$AGE, main = "R´epartition des ^ages", col.main = "steelblue")
+```
+
+
+
+## d)
+```{r}
+hist(do$AGE, main = "Distribution de l’^age des m`eres", col.main = "steelblue", col = "paleturquoise", xlim = c(0, 50))
+```
+# Question 4
+## a)
+```{r}
+hist(do$AGE, prob = TRUE, xlim = c(0, 50), ylim = c(0, 0.1))
+```
+## b)
+```{r}
+hist(do$AGE, prob = TRUE, xlim = c(0, 50), ylim = c(0, 0.1))
+curve(dnorm(x, mean = mean(do$AGE), sd = sd(do$AGE)),
+      add = TRUE, lwd = 1.5, col = "red")
+```
+# Question 5)
+ X suis la loi  N (µ, σ) <br/>
+ H_0 : µ = 25 <br/>
+ H_1 : µ != 25 <br/>
+```{r}
+t <- (mean(do$AGE) - 25) / (sd(do$AGE) / sqrt(length(do$AGE)))
+t
+w <- 2 * (1 - pt(abs(t), df = length(do$AGE) - 1))
+w
+```
+ On remarque que h0 n'est pas possible
+
+
+
+# Question 6)
+```{r}
+t.test(do$AGE, mu = 25)
+```
+# Question 7)
+```{r}
+sd(do$AGE)
+sd(do$AGE) / mean(do$AGE)
+```
+
+# Question 8)
+##  3)
+### a)
+```{r}
+do$BWT
+```
+### b)
+```{r}
+mean(do$BWT)
+var(do$BWT)
+sd(do$BWT)
+median(do$BWT)
+quantile(do$BWT)
+min(do$BWT)
+max(do$BWT)
+
+```
+## c)
+```{r}
+boxplot(do$BWT, main = "R´epartition du BWT", col.main = "steelblue")
+```
+
+### d)
+```{r}
+hist(do$BWT, main = "Distribution du BWT", col.main = "steelblue", col = "paleturquoise")
+```
+
+## 4)
+### a)
+```{r}
+hist(do$BWT, prob = TRUE)
+```
+### b)
+```{r}
+hist(do$BWT, prob = TRUE)
+curve(dnorm(x, mean = mean(do$BWT), sd = sd(do$BWT)),
+      add = TRUE, lwd = 1.5, col = "red")
+```
+
+## 5)
+ X suis la loi  N (µ, σ) <br/>
+ H_0 : µ = 3500 <br/>
+ H_1 : µ != 3500 <br/>
+```{r}
+t <- (mean(do$BWT) - 3500) / (sd(do$BWT) / sqrt(length(do$BWT)))
+t
+w <- 2 * (1 - pt(abs(t), df = length(do$BWT) - 1))
+w
+```
+ On remarque que h0 n'est pas possible
+
+
+
+## 6)
+```{r}
+t.test(do$BWT, mu = 3500)
+```
+## 7)
+```{r}
+sd(do$BWT)
+sd(do$BWT) / mean(do$BWT)
+```

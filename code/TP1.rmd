@@ -1,0 +1,103 @@
+---
+title: "TP1"
+author: Paul-Alexandre Fourrière
+date: 11/09/2020
+output: html_notebook
+---
+## Question 1 :
+```{r}
+do <- read.table("banque.txt", header = TRUE)
+do
+```
+## Question 2 :
+```{r}
+sapply(do, class)
+```
+## Question 3 :
+### a)
+```{r}
+do$AGE
+```
+### b)
+```{r}
+mean(do$AGE)
+var(do$AGE)
+sd(do$AGE)
+median(do$AGE)
+quantile(do$AGE)
+min(do$AGE)
+max(do$AGE)
+```
+### c)
+```{r}
+boxplot(do$AGE)
+```
+### d)
+```{r}
+hist(do$AGE)
+```
+## Question 4
+### a)
+```{r}
+do$ED
+```
+### b)
+```{r}
+effectifsED <- table(do$ED)
+effectifsED
+```
+### c)
+```{r}
+effectifsED/sum(effectifsED)*100
+```
+### d)
+```{r}
+barplot(effectifsED)
+```
+
+## Question 5
+### a)
+```{r}
+do$DECOUVERT
+```
+### b)
+```{r}
+effectifsDEC <- table(do$DECOUVERT)
+effectifsDEC
+effectifsDEC/sum(effectifsDEC)*100
+```
+### c)
+```{r}
+pie(effectifsDEC)
+```
+## Question 6
+### a)
+```{r}
+revenuED <- split(do$REVENU, do$ED)
+revenuED
+```
+### b)
+```{r}
+boxplot(do$REVENU~do$ED)
+boxplot(revenuED)
+```
+### c)
+```{r}
+sapply(revenuED,mean)
+sapply(revenuED,var)
+sapply(revenuED,sd)
+```
+## Question 7
+### a)
+```{r}
+EDsplitDECOUVERT <- split(do$ED, do$DECOUVERT)
+EDoui <- EDsplitDECOUVERT$"oui"
+EDnon <- EDsplitDECOUVERT$"non"
+```
+### b)
+```{r}
+tO <- table(EDoui)
+tO
+tN <- table(EDnon)
+tN
+```
