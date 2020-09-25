@@ -193,3 +193,118 @@ $$
 Si Ho est vrai, t suit la loi de Student t(n-1) n)taille de l'echantillon
 
 rq ; erreur standard de la moyenne par  s/ sqrt(n) ou s est l'ecart type
+
+
+
+## Test de normalité
+
+var : quantitative (X)
+
+tester des hypothèse : 
+
+- H0 : X suit la loi normal
+- H1 : X ne suit pas la loi normale
+
+Comparer Histogramme et courbe loi normale => dépends des tailles des classes 
+
+Utilisation des fonctions de répartitions 
+$$
+F(X) = P(X \leq x)
+$$
+2 façon : 
+
+- Echantillon proportion des individus pour lesquels X <= x
+- Si h0 est vrai, on peut calculer la proba théorique P(X <= x)
+
+$$
+pvalue = P(ecart \geq x | H_0 estvraie)
+$$
+
+
+
+Diagramme quantile-quantile 
+
+ 	Si les données suivent une loi normale, les données doivent être alignées 
+
+
+
+# Analyses bivariées 
+
+
+
+Lien entre X et Y => type des deux variables
+
+## Variable Quantitative et Variable Qualitative
+
+Y (Quantitative)
+
+X (Qualitative) = On note K le nb de réponse (Modalité) de X
+
+### X = 2
+
+Comme X a 2 modalités on peut séparer l'échantillon en 2 groupe 
+
+1 et 2
+
+On cherche à composer la variable Y entre les deux groupes 
+
+
+
+Ici comparaison des moyennes 
+
+On suppose que Y suit une loi normale dans le groupe 1 et 2 
+
+​		Y suis la loi N(MoyenneGR1,Ecart-type) : groupe 1
+
+​		Y suis la loi N(MoyenneGR2,Ecart-type) : groupe 2
+
+On suppose que les ecarts-type sont les même dans le groupe 1 et 2
+
+On veut tester les hypo 
+
+​		H0 : MoyenneGR1 = MoyenneGR2
+
+​		H1 : MoyenneGR1 != MoyenneGR2
+
+
+
+Variable de test : 
+$$
+t = \frac{\bar{y_1}-\bar{y_2}}{s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+$$
+
+$$
+s^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1+n_2-2}
+$$
+
+s² variance commune 
+
+s = ecart type commun (pooled sd)
+$$
+s = \sqrt\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1+n_2-2}
+$$
+
+$$
+pvalue = P( |t| \geq |t_{observé}| si h_0 vrai )
+$$
+
+pvalue < 0,05=> regette h0
+
+pvalue > 0,05 on ne regette pas h0
+
+
+
+On represente pvalue sur le graphe des moyennes on utilise un code ex:
+
+​			pvalue < 0,05 *
+
+​			pvalue < 0,01 **
+
+​			pvalue < 0,001 **
+
+​	
+
+Rq :  le test de comparaisons des données il faut verif
+
+- Normalité des données 
+- Homogénéité des variances 
