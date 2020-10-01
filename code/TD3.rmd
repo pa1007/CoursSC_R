@@ -1,0 +1,84 @@
+---
+title: "TD3 Enquete et sondage"
+author: Paul-Alexandre Fourrière
+date: 25/09/2020
+output: html_notebook
+---
+
+
+```{r}
+do <- read.table("naissances.txt", header = TRUE)
+```
+
+# Question 1)
+
+```{r}
+boxplot(do$BWT ~ do$SMOKE, main = "R´epartition des poids des enfants
+pour les m`eres fumeuses/non fumeuses", col = "lightcyan")
+```
+On remarque une petite différence entre le poids des bébé des maman qui fument et celles qui ne fument pas
+
+# Question 2 )
+```{r}
+mean(do$BWT)
+mean(table(do$SMOKE))
+var(do$BWT)
+var(table(do$SMOKE))
+sd(do$BWT)
+sd(table(do$SMOKE))
+length(do$BWT)
+length(do$SMOKE)
+```
+# Question 3)
+```{r}
+varfacteur <- split(do$BWT, do$SMOKE) # remplacer la variable par la variable quantitative et le facteur par la variable qualitative
+varfacteur
+mg <- sapply(varfacteur, mean) # Calcul des moyennes par groupes
+mg
+x <- barplot(mg, ylim = c(0, 3200))
+n <- sapply(varfacteur, length) # Calcul des effectifs par groupes
+n
+sapply(varfacteur, sd) # Calcul des ´ecarts-types par groupes
+sem <- sapply(varfacteur, sd) / sqrt(n) # Calcul des erreurs standards par groupes
+sem
+arrows(x[1], mg[1] - sem[1], x[1], mg[1] + sem[1], angle = 90, code = 3)
+arrows(x[2], mg[2] - sem[2], x[2], mg[2] + sem[2], angle = 90, code = 3)
+```
+#Question 4)
+X :  groupe 1 (Oui)
+Y :  groupe 2 (Non)
+
+H0 : les moyennes de X et Y sont égales <br/>
+H1 : les moyennes de X et Y ne sont pas égales <br/>
+
+```{r}
+X <- varfacteur$oui
+Y <- varfacteur$non
+
+s <- sqrt(((length(X) - 1) * + (length(Y) - 1) * sd(Y)^2) / length(X) + length(Y) - 2)
+s
+
+t <- (mean(X) - mean(Y)) / (s * sqrt(1 / length(X) + 1 / length(Y)))
+t
+
+
+t.test(varfacteur$oui, varfacteur$non, var.equal = TRUE)
+```
+var.equal=TRUE permet de dire a la fonction que les deux paramêtres sont egaux ou pas, peremt une utilisation de la
+
+# Question 5)
+```{r}
+var.test(varfacteur$oui, varfacteur$non)
+```
+
+Shapiro test : <br>
+H0 : X suit la loi normal <br>
+H1 : X ne suit pas la loi normal
+
+
+```{r}
+shapiro.test(varfacteur$oui)
+shapiro.test(varfacteur$non)
+```
+
+

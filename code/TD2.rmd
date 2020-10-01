@@ -1,5 +1,5 @@
 ---
-title: "TD2 Enquete est sondage"
+title: "TD2 Enquete et sondage"
 author: Paul-Alexandre Fourrière
 date: 18/09/2020
 output: html_notebook
@@ -61,8 +61,8 @@ curve(dnorm(x, mean = mean(do$AGE), sd = sd(do$AGE)),
 ```{r}
 t <- (mean(do$AGE) - 25) / (sd(do$AGE) / sqrt(length(do$AGE)))
 t
-w <- 2 * (1 - pt(abs(t), df = length(do$AGE) - 1))
-w
+pvalue <- 2 * (1 - pt(abs(t), df = length(do$AGE) - 1))
+pvalue
 ```
  On remarque que h0 n'est pas possible
 
