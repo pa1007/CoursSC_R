@@ -45,9 +45,9 @@ arrows(x[1], mg[1] - sem[1], x[1], mg[1] + sem[1], angle = 90, code = 3)
 arrows(x[2], mg[2] - sem[2], x[2], mg[2] + sem[2], angle = 90, code = 3)
 ```
 #Question 4)
-X :  groupe 1 (Oui)
-Y :  groupe 2 (Non)
-
+X :  groupe 1 (Oui)<br>
+Y :  groupe 2 (Non)<br>
+<br>
 H0 : les moyennes de X et Y sont égales <br/>
 H1 : les moyennes de X et Y ne sont pas égales <br/>
 
@@ -55,7 +55,7 @@ H1 : les moyennes de X et Y ne sont pas égales <br/>
 X <- varfacteur$oui
 Y <- varfacteur$non
 
-s <- sqrt(((length(X) - 1) * + (length(Y) - 1) * sd(Y)^2) / length(X) + length(Y) - 2)
+s <- sqrt(((length(X) - 1) * +(length(Y) - 1) * sd(Y)^2) / length(X) + length(Y) - 2)
 s
 
 t <- (mean(X) - mean(Y)) / (s * sqrt(1 / length(X) + 1 / length(Y)))
@@ -64,7 +64,9 @@ t
 
 t.test(varfacteur$oui, varfacteur$non, var.equal = TRUE)
 ```
-var.equal=TRUE permet de dire a la fonction que les deux paramêtres sont egaux ou pas, peremt une utilisation de la
+var.equal=TRUE permet de dire a la fonction que les deux paramêtres sont egaux ou pas, peremt une utilisation de la <br>
+
+On remarque que p-value est inférieur a 0.05 donc on peut conclure que h0 est vrai
 
 # Question 5)
 ```{r}
@@ -81,4 +83,83 @@ shapiro.test(varfacteur$oui)
 shapiro.test(varfacteur$non)
 ```
 
+On remarque que la p-value dans les deux cas n'est pas significative et on rejete h0
 
+# Question 6)
+```{r}
+varfacteur2 <- split(do$AGE, do$SMOKE) # remplacer la variable par la variable quantitative et le facteur par la variable qualitative
+varfacteur2
+mg <- sapply(varfacteur2, mean) # Calcul des moyennes par groupes
+mg
+n <- sapply(varfacteur2, length) # Calcul des effectifs par groupes
+n
+sapply(varfacteur2, sd) # Calcul des ´ecarts-types par groupes
+sem <- sapply(varfacteur2, sd) / sqrt(n)
+sem
+```
+
+X :  groupe 1 (Oui) <br>
+Y :  groupe 2 (Non)<br>
+<br>
+H0 : les moyennes de X et Y sont égales <br/>
+H1 : les moyennes de X et Y ne sont pas égales <br/>
+
+```{r}
+t.test(varfacteur2$oui, varfacteur2$non, var.equal = TRUE)
+```
+
+On remarque que le p-value est supérieur a 0.05 donc on rejete h0 et on admet h1 <br>
+
+Shapiro test : <br>
+H0 : X suit la loi normal <br>
+H1 : X ne suit pas la loi normal
+
+```{r}
+shapiro.test(varfacteur2$oui)
+shapiro.test(varfacteur2$non)
+```
+On remarque que pour les deux groupes que la p-value est inférieur a 0.05 donc on admet h0 donc les deux suivent la loi normal
+
+
+# Question 7)
+## a )
+Varriable : <br>
+- Quantitative :  BWT <br>
+- Qualitative : HT <br>
+<br>
+Hypothèses :  <br>
+H0 : L'hyperthension de la mère montre un poids plus éléver chez l'enfant <br>
+H1 : L'hyperthension de la mère ne montre aucune diférence de poids chez l'enfant<br>
+
+
+```{r}
+varfacteur3 <- split(do$BWT, do$HT) # remplacer la variable par la variable quantitative et le facteur par la variable qualitative
+varfacteur3
+mg <- sapply(varfacteur3, mean) # Calcul des moyennes par groupes
+mg
+n <- sapply(varfacteur3, length) # Calcul des effectifs par groupes
+n
+sapply(varfacteur3, sd) # Calcul des ´ecarts-types par groupes
+sem <- sapply(varfacteur3, sd) / sqrt(n)
+sem
+```
+Test de normalité : <br>
+
+Shapiro test : <br>
+H0 : X suit la loi normal <br>
+H1 : X ne suit pas la loi normal
+```{r}
+shapiro.test(varfacteur3$oui)
+shapiro.test(varfacteur3$non)
+```
+
+On remarque que la p-value dans les deux cas n'est pas significative et on rejete h0 <br>
+
+Test de l'égalité des variance :
+```{r}
+t.test(varfacteur3$oui, varfacteur3$non, var.equal = TRUE)
+```
+On remarque que le p-value est proche de 0.05, nous ne pouvons pas conclure
+```{r}
+boxplot(do$BWT ~ do$HT, main= "Répartition des masses des enfants pour les mère qui font de l'hypertension", col="lightcyan",ylab = "Masse (g)" , xlab = "Hypertension")
+```
