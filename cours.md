@@ -308,3 +308,107 @@ Rq :  le test de comparaisons des données il faut verif
 
 - Normalité des données 
 - Homogénéité des variances 
+
+## B X a K > 2 modalités : Analyse des variance (ANOVA)
+
+Comparer moyennes d'une variable Y mesure sur K >2 groupes 
+
+Hypo à tester : 
+
+h0 : moyenne identique entre les groupes 
+
+h1 : Au moins deux groupes ont des moyennes différentes 
+
+
+
+On suppose que Y suit la loi normale dans chacun des groupes (A vérifier)
+
+On suppose que Y suit l'homogénéité des variance 
+
+- H0 : homogénéité des variances 
+- H1 ; Il existe j et l tels que variance de j != variance de l
+
+Rappels : 
+
+nj = effectifs
+
+sj = ecart type
+
+s²j = variance 
+
+
+
+y(bar) = moyenne globale            (Moyenne des moyennes)    
+
+s = ecart type
+
+s² = variance
+
+
+
+Variation totale des données = variation due a la différence entre les groupes + variation résiduelle 
+
+
+
+
+$$
+(n-1)s^2 \space\space\space\space\space\space\space\space\space= n_1(\bar{y}_1-\bar{y})^2 + \dots +(n_1-1)s^2_1 + \dots + (n_k-1)s^2_k \\
+\space SumSQ(TOTAL) = \space\space\ SumSQ(Facteur) \space\space\space\space\space + SumSQ(Residuel)
+$$
+
+
+
+
+
+
+Variable de test : 
+$$
+F = \frac{\frac{SumSQ(Facteur)}{(n-k)}}{\frac{SumSQ(Residuel)}{(k-1)}}
+$$
+F mesure la différence (normalisée) entre les groupes : plus F est grand plus les groupes ont moyenne diff
+
+Si h0 est vrai alors on connais la loi de F 
+
+F( n-k ; k-1 )
+
+On peut calculer la p-value= P(F > Fobservé | H0 est vraie )
+
+Si p-value < 0,05 : on rejette H0
+
+Si p-value > 0,05 : on accepte H0
+
+
+
+Si l'ANIVA conduit à rejeter H0, il faut chercher les groupes pour lequel les moyennes sont significativement différentes => Comparaison multiples / a posteriori 
+$$
+s^2_{commun} = \frac{(n_1-1)s^2_1 + \dots + (n_k-1)s^2_k}{n-k}
+$$
+Test de student ; 
+
+H0 : moy j = moy l 
+
+H1 : moy j != moy l
+
+Test de student ; 
+$$
+t = \frac{\bar{y_j}-\bar{y_l}}{s_{commun}\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+$$
+
+### Remarques 
+
+- il faut vérifier l'homogénéité des variances 
+
+  - H0 tout les variances sont égales
+  - Utilisation du test de Bartlett
+
+- Il faut vérifier la normalité des données 
+
+  En pratique on test la normalité des résidus = écart entre l'observation et la moyenne du groupe auquel appartient l'observation
+
+  y obs groupe j = y bar j + residu
+
+  La théorie dit que les résidus suivent la loi normale N(0,ecart type) pour tous les groupes
+
+## 2) Lien entre deux variables quantitatives 
+
+Soient X et Y deux variables quantitatives : On cherche à étudier le lien éventuel entre X et Y => corrélation linéaire 

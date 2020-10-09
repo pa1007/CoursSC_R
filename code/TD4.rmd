@@ -1,0 +1,146 @@
+# Exo1
+## Question 1 )
+```{r}
+do <- read.table("../stress.txt", header = TRUE)
+head(do)
+```
+```{r}
+boxplot(do$Requetes ~ do$Bureau)
+```
+```{r}
+library(gplots)
+plotmeans(do$Requetes ~ do$Bureau, data = ToothGrowth, mean.labels = TRUE, connect = FALSE)
+```
+
+On remarque que les moyennes ne sont pas proche
+
+## Question 2)
+
+H0: Les moyennes du nombre de requette sont fonction du type de bureau <br>
+
+H1: Les moyennes du nombre de requette ne sont pas fonction du type de bureau
+
+
+## Question 3)
+```{r}
+resultat <- aov(do$Requetes ~ do$Bureau, do)
+resultat
+summary(resultat)
+```
+On a une pvalue inférieur a 0,005 donc on rejette l'homogénéité des variances; on fais un test de student sur chaque
+```{r}
+
+```
+```{r}
+varfacteur <- split(do$Requetes, do$Bureau)
+varfacteur
+
+t.test(varfacteur$`2a4`, varfacteur$sup4cloisonne, var.equal = TRUE)
+t.test(varfacteur$`2a4`, varfacteur$sup4paysager, var.equal = TRUE)
+t.test(varfacteur$sup4cloisonne, varfacteur$sup4paysager, var.equal = TRUE)
+
+```
+D'àpres les testes de student, on remarque que la p-value du test de student pour 2a4 et sup4paysager est bien en dehors de la valeur de confiance,
+
+## Question 4)
+
+
+```{r}
+pairwise.t.test(do$Requetes, do$Bureau, p.adjust.method = "none")
+pairwise.t.test(do$Requetes, do$Bureau, p.adjust.method = "bonferroni")
+```
+
+On remarque que les p-value sont inférieur a 0,05;
+
+## Question 5)
+
+```{r}
+mean(varfacteur$`2a4`) - 9
+```
+La différence entre la moyenne (12,05) et la personne intérrogé (9) est de 3,05
+
+## Question 6)
+```{r}
+resultat$residuals
+plot(resultat$residuals)
+boxplot(resultat$residuals ~ do$Bureau)
+shapiro.test(resultat$residuals)
+qqnorm(resultat$residuals)
+qqline(resultat$residuals)
+```
+## Question 7)
+
+```{r}
+bartlett.test(do$Requetes, do$Bureau)
+bartlett.test(resultat$residuals, do$Bureau)
+```
+## Question 8)
+### 3)
+```{r}
+resultat2 <- aov(do$Bienetre ~ do$Bureau, do)
+resultat2
+summary(resultat2)
+```
+### 4)
+```{r}
+varfacteur2 <- split(do$Bienetre, do$Bureau)
+varfacteur2
+
+t.test(varfacteur2$`2a4`, varfacteur2$sup4cloisonne, var.equal = TRUE)
+t.test(varfacteur2$`2a4`, varfacteur2$sup4paysager, var.equal = TRUE)
+t.test(varfacteur2$sup4cloisonne, varfacteur2$sup4paysager, var.equal = TRUE)
+```
+On remarque que toutes les p-value sont dans le bon indice
+
+### 6)
+
+```{r}
+resultat2$residuals
+plot(resultat2$residuals)
+boxplot(resultat2$residuals ~ do$Bureau)
+shapiro.test(resultat2$residuals)
+qqnorm(resultat2$residuals)
+qqline(resultat2$residuals)
+```
+
+### 7)
+```{r}
+bartlett.test(do$Bienetre, do$Bureau)
+bartlett.test(resultat2$residuals, do$Bureau)
+```
+# Exercice 2 :
+```{r}
+do <- read.table("../hop.txt", header = TRUE)
+head(do)
+```
+## Question 1)
+Hypotèse : <br>
+H0 : L’agitation des patients ne diffère pas suivant la visite de l’association <br>
+H1 :  L’agitation des patients  diffère  suivant la visite de l’association
+```{r}
+a <- split(do$Agitation, do$Visite)
+a
+boxplot(do$Agitation ~ do$Visite)
+t.test(a$oui, a$non, var.equal = TRUE)
+```
+On a une p-value > 0,05 donc on regètre H0 et on admet H1
+## Question 2)
+Hypotèse : <br>
+H0 : Le nombre de jours d’hospitalisation  ne diffère pas selon le type de maladie <br>
+H1 :  Le nombre de jours d’hospitalisation diffère selon le type de maladie
+
+```{r}
+a <- split(do$Duree_Hosp, do$Maladie)
+a
+boxplot(do$Duree_Hosp ~ do$Maladie)
+t.test(a$cancereux, a$cardiaque, var.equal = TRUE)
+t.test(a$osseux, a$cardiaque, var.equal = TRUE)
+t.test(a$vasculaire, a$cardiaque, var.equal = TRUE)
+t.test(a$vasculaire, a$osseux, var.equal = TRUE)
+t.test(a$cancereux, a$osseux, var.equal = TRUE)
+t.test(a$cancereux, a$vasculaire, var.equal = TRUE)
+```
+
+
+Ici pour accepter h0, chaque p-value doit être en dessous de 0,05 or on remarque par exemple que pour vasculaire et cardiaque le p-value est > 0,05 donc on rejet H0 et on admet H1
+
