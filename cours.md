@@ -412,3 +412,288 @@ $$
 ## 2) Lien entre deux variables quantitatives 
 
 Soient X et Y deux variables quantitatives : On cherche à étudier le lien éventuel entre X et Y => corrélation linéaire 
+
+Y variable à expliquer
+
+X variable explicative
+
+On a mesuré x et y sur un échantillions de taille n
+$$
+\left \{
+\begin{array}{rcl}
+x_1,x_2,\dots,x_n \\
+y_1,y_2,\dots,y_n
+\end{array}
+\right.
+$$
+Rep graph : nuage de point
+
+On cherche a étudier les variabilité de x et de y, en particulier, peut-on expliquer la variabilité de Y par la variabilité de x
+
+On calcule sur l'échantillion : 
+
+- moyenne : x bar et y bar
+- variance : s^2^_x, s^2^_y
+
+On note $S_{x,y}$ 
+$$
+S_{x,y} = \frac{(x_1-\bar{x})(y_1-\bar{y})+ \dots + (x_n-\bar{x})(y_n-\bar{y})}{n-1}
+$$
+
+$$
+r_{x,y} = \frac{s_{x,y}}{s_{x}*s_{y}}
+$$
+
+
+
+
+On peut montrer que -1 < $r_{x,y}$ <1
+
+si $r_{x,y}$  = +1 alors les points sont alignés sur une droite croissante
+
+Si $r_{x,y}$ = 1 décroissante 
+
+Si $r_{x,y}$  proche de +1, corrélation positive 
+
+​								-1 corrélation négative
+
+On test les hypothèse suivante 
+
+H0 : la corrélation entre x et y est nulle 
+
+H1 : la corélation entre x et y est non nulle
+
+
+
+$$
+t = \sqrt{n-2}\frac{r_{x,y}}{\sqrt{1- r_{x,y}}}
+$$
+
+
+Si H0 est vrai, alors t suit de loi de stut t(n-2) donc on peut calculer p-value = P(|t|> |tobserver| | H0 vrai)
+
+Si p-value <0,05 la corrélation entre X et Y est significative
+
+Si p-value > 0,05 : la corrélation ente x et y n'est pas significante
+
+On peut définir un modèle linéaire entre X et Y 
+$$
+Y = \beta_0 + \beta_1X+\epsilon
+$$
+$\epsilon$ = résidu erreur et on suppose qu'il suit la loi normale N(0,$\delta$)
+
+On peut estimer les valeurs de $\beta_0 \space et \space \beta_1$ à partir de l'echantillon
+
+
+$$
+\hat\beta_1 = \frac{s_{x,y}}{s^2_x} \\
+\hat\beta_0 = \bar{y}-\beta_1 \bar{x}
+$$
+ON a donc des estimation des résidus 
+$$
+\hat\epsilon_i = y_i-\hat{y}_i ou \hat{y}_i = \hat\beta_0 + \hat\beta_1x_i
+$$
+
+
+Remarque on peut donc vérifier l'hypothèse de normalité des résidus
+
+
+
+On peut montrer la relation suivante 
+$$
+r_{x,y}^2 = \frac{s_{\hat{y}}^2}{s_y^2}
+$$
+C'est un pourcentage, de la variabilité de y expliquer par le modèle (Donc la variabilité de x)
+$$
+1 - r_{x,y}^2 = \frac{s_{\hat\epsilon}^2}{s_y^2}
+$$
+Variance total :
+$$
+s_y^2 = s_{\hat{y}}^2 + s_{\hat\epsilon}^2
+$$
+On peut également étudier des modèles avec plusieurs variables explicatives X
+
+=> Model de régression multiple 
+$$
+Y= \beta_0 + \beta_1X_1 + \dots + \beta_pX_p + \epsilon
+$$
+
+## 3. Lien entre 2 variables quantitatives :
+
+Soit X et Y deux variables qualitatives : X prend les modalités $x_1,x_2,\dots,x_k$
+
+​																	y prend les modalités $y_1,y_2,\dots,y_k$
+
+On test les hypothèse suivantes : 
+
+$H_0$ : X et Y sont indépendantes
+
+$H_1$ : X et Y ne sont pas indépendantes
+
+Pour tout évènement 
+
+$P(X = x_i\cap y= y_i) = P(x=x_i)x$
+
+On mesure X et Y sur un échantillon de taille n et on construit le tableau de contingence :
+
+![Tableau de contingence](https://www-ljk.imag.fr/membres/Bernard.Ycart//smel/cours/sd/img400.gif)
+
+$n_{ij}$ = effectif de l'échantillon pour lequel $x=x_i$ et $y=y_i$
+
+<img src="https://puu.sh/GDzho/6d0fb87b17.png" alt="formules" style="zoom:50%;" />
+
+Si $h_0$ est vraie on devrait avoir : 
+$$
+\frac{n_{ij}}{n} = \frac{n_{i.}-n_{.j}}{n^e}
+$$
+La varaible de test est : 
+$$
+x^2 = \frac{(n_{observé}- n_{theorique})^2}{n_{theorique}}
+$$
+X² suit la loi du X² ((l-1)(k-1))
+
+Si p-value <0,05: on rejette H0 => les varriables ne sont pas signigicativement indépendantes / sont sig dépendantes; p-value > 0,05 les varriables sont indé
+
+## 4) Cas des test non-paramétriques
+
+Pour réaliser les tests des paragraphes 1 et 2, les variables doivent vérifier certaines conditions (Normalité,homogénéité des variances)
+
+Si ces conditions ne sont pas réalises, il existe des test équivalents : test non paramétriques
+
+Ces tests sont réalisés à partir de l'ordre des données des variables quantitatives (Rang des données)
+
+
+
+
+
+## 5) Analyses exploratoires
+
+### 1) Analyse factorielles 
+
+On a mesuré p variables sur n individus et on essaye d'extraire de ces variables l'information principale
+
+#### a) analyse factorielle
+
+Les variables étudiées sont quantitatives :$y_1,y_2,\dots,y_k$
+
+exemple questionnaire IAT 
+
+p == 17
+
+$y_j$ prend les valeurs 1,2,3,4,5
+
+On peut calculer la variance de chaque variable variance ) 0 <=> toutes les réponses à cette question sont identiques 
+
+
+
+On modifie les variables pour que toutes les variances soient égale à 1 => vaiables réduite $z_1,z_2,\dots,z_{17}$
+
+variance z_j = 1
+
+On définit la varraince totale par varainace Z1 + variance Z2 + ... = p
+
+var tot = information dans les réponses
+
+On peut également mesurter les corrélations entre les variables nj et nk Rjk
+
+Si les corrélation sont non nulles on peut chercher à expliquer les liens entre les variables
+
+##### Model à 1 facteur 
+
+On intro un facteur F tel que : 
+$$
+\begin{cases}
+z_1 = l_1F + E_1 \\ 
+z_2 = l_2F + E_2\\
+\vdots\\
+z_p = l_pF + E_p
+\end{cases}
+$$
+l1,....lp : communalités 
+
+Ej  = spécifique à chaque variables
+
+Ej indé de F = corrélation entre Ej et F = 0
+
+variance (Zj) = var(ljF) + zcov(ljFiEj) + var(Ej)
+
+1 = l²j var (F) + 0  + var (Ej)
+
+On suppose que F est centre-reduit var(F) = 1
+
+
+
+On obtient : 
+$$
+1 = j^2_j + var (E_j)
+$$
+![Forumes](https://puu.sh/GDzTy/08a73a54b4.png)
+
+![jsp](https://lh3.googleusercontent.com/dLPBd3fZKWZ1s-insC53wVNDvmjCSW3E10VUyoZIv9CGoqgNFQjfNn3mHu4kKo4ymTpwGiFd-ehUYMXcjdiILFmsmtwioeAQa3ylWTevCYnNR1CaIdmDxKm0Tg9tM9FWIvwmMuWWANdn1V9iOzodVDFTt1UOSIu1nj9E1esYk2TxJ1ktX1JzlF-BQC7HrUKpzSqvOUf4QE2eTa2ZvWqRsBTOVKc6-yF8jjxGnNral_W-0LxYh1Q9w_yIdqxIqcgVq6Xlj2TT8lWzPaHT4XvVp_Vy4Nu878gxBWE5CWpXp2v9G2rQ-iWXpJ0MMWTsz3Cm1AFN4RM1Ruu3NJ47A8anvAyLbMdt0_ZkwBnMeVtfJ05uGZengPFElGDcyUz5NP5z5Q1VVuVjlxF2aSwg94NCIM2kDZd_sECLtJW1gWIGXZe9AWPSsjuxLI2-_rfgkzLfKLJsZN1KUh7g7eQMyYXbi405gMgXxkd8i78dvZQ9VRGHMbwV-QgT-cFsVcDAv0AFcBFWXmIhiiv9vGcbsGXLC9jvCxRAKa3UZGTcrhBfERNvsBWDAKRlIIcVo-hEJU5zLBt7NAb9oDeSGbFp3ZsV-vp_KZ7XbRYBLlem0nvSo-XQREC-o8gbpo8aFdz4noMxkNHLL-pG2mWjfrrXLqusFW-QOPQgovGxGLt3ZuU2Up0AiCN-0ze6oysN6z0v9g=w864-h553-no?authuser=0)
+
+Question ; 
+
+Combien de facteurs sont nécessaire pour expliquer les liens entre les variables ?
+
+- il existe un test pour verifier si k facteurs sont suffisents; 
+- On peut calculer à partir des corrélations le nombre de facteurs necessaires à l'analyse (= nombre de valeurs propres > 1 de la matruces  corrlations)
+
+#### b) Analyse en composantes Principles (ACP)
+
+On dispose de données mesurées sur n individus avec p variables quantitatives (p>2)
+
+But : analyser simultanément en p variables pour extraire l'information principale et visualiser les individus selon cette information : représenter la diversité des individus et expliquer cette diversité
+
+Exemple n = 31 individus qui font un exercice physique et on mesure p=5 variables Age,Poids,Conso oxygène,Tps, Pulsation cardiaque
+
+Information dans les données = variance des variables 
+
+On utilise des données centrées-reduites => les variance sont egales à 1 
+
+Info total = p(5)
+
+Pour mesurer les liens entre les variables, on calcules les corrélation -> matrice de corrélation regroupes toutles les corrélation (cor(donnee))
+
+But de l'acp: transformer les variables initiales par exemple 
+
+Pour obtenur des variables sont la variance est >1
+
+-> cela revient à changer de système de coordonnée. 
+
+-> on hiérarchise les nouvelles coordonnées en fonction des variances de chacune de ces nouvelles variables = composantes principales
+
+On peut montrer que la variance maximale est la plus grande valeur propre $\lambda_1$ de la matrice de corrélation et la 1ere composantes principale est obtenu avec vercteur propre de la matrice de corrélation associer à $\lambda_1$
+
+On obtient le  cercle des corrélations faut l'interpréter 
+
+### 2) Classification 
+
+On a n individus p variables quantitatuves et on cherche a former des groupes d'individus 
+
+- A l'interieur d'un groupe; les individus se resemblent
+- 2 groupes distinct sont assez diff pour ne pas les fusionner
+
+On définit deux notions :
+
+- Inertie intra groupe (à l'interieur du groupe)
+
+- Inertie inter groupe (entre les groupes)
+
+But : Partir du classement ou chaque individu est dans 1 seul groupe 
+
+-> diminuer progressivement le nb de groupe (Augementer Iintra)
+
+- jusqu'a ce qu'on regroupe deux groupes trop diférents (Intra augemente trop)
+
+
+
+
+
+
+
+
+
+
+
+
+

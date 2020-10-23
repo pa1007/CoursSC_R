@@ -1,0 +1,44 @@
+---
+title: "testAIT"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+data <- read.table("resultsIATT.txt", header=TRUE)
+```
+
+```{r}
+factanal(data, factors=2)
+```
+
+# on peut créer 2 variables de score.
+# temps = Z1 + Z2 + Z6 + Z8 + Z14 + Z16 + Z17
+
+# F1 : 14,16,8,6,1,2,17
+# F2 : 9,10,18,17
+
+```{r}
+temps <- data$IAT.SQ014. + data$IAT.SQ016. + data$IAT.SQ008. + data$IAT.SQ006. + data$IAT.SQ001. + data$IAT.SQ002. + data$IAT.SQ017.
+social <- data$IAT.SQ009. + data$IAT.SQ010. + data$IAT.SQ018. + data$IAT.SQ017.
+```
+
+```{r}
+hist(temps)
+hist(social)
+```
+
+```{r}
+hist(temps + social)
+```
+
+# F1 : 7 items sont sensés mesurer la même dimension
+# On souhaite vérifier la cohérence interne des items
+
+
+```{r}
+```
+
