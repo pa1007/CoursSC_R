@@ -4,3 +4,108 @@ author: Paul-Alexandre Fourrière
 date: 25/09/2020
 output: html_notebook
 ---
+
+# Exo 1
+
+```{r}
+do <- read.table("../tests.txt", header = TRUE)
+head(do)
+```
+## Question 1 :
+
+```{r}
+M <- cor(do)
+M
+```
+
+## Question 2 :
+```{r}
+library(corrplot)
+pmat <- cor.mtest(do)
+pmat
+corrplot(M, type = "upper", p.mat = pmat$p, sig.level = 0.05)
+```
+
+## Question 3 :
+```{r}
+model1 <- factanal(do, factors=1)
+model1
+```
+Quelle est la variance expliqu´ee par le facteur commun ? <br>
+<br>
+<br>
+Quel pourcentage cela repr´esente-t-il par rapport `a la variance totale ? <br>
+<br>
+<br>
+Un seul facteur est-il suffisant ?<br>
+Non, un seul facteur n'est pas assez<br>
+## Question 4 )
+```{r}
+model2 <- factanal(do, factors=2)
+model2
+model3 <- factanal(do, factors=3)
+model3
+model4 <- factanal(do, factors=4)
+model4
+```
+D'après la pvalue, le seul bon facteur est celui ou il y en a 3
+## Question 5 )
+```{r}
+x <- eigen(cor(do))
+x
+length(x$values[x$values>1])
+```
+Il ya 3 valeurs supérieurs a 1
+
+## Question 6)
+```{r}
+model3
+```
+## Question 7 )
+
+
+## Question 8 )
+```{r}
+library(psy)
+cronbach(model3$loadings)
+```
+# Exo 2
+
+```{r}
+do <- read.table("../yt.txt", header = TRUE)
+head(do)
+```
+## Question 1 :
+```{r}
+pairs(do)
+```
+Cela permet de regarder la corrélation possible entre toutes les variables
+## Question 2 :
+```{r}
+cor(do)
+```
+Il y a le travail et le temps; travail et divertisement; et divertisement et temps
+## Question 3 :
+```{r}
+library(FactoMineR)
+resultat <- PCA(do)
+```
+## Question 4 :
+```{r}
+resultat$eig
+barplot(resultat$eig[,1])
+plot(resultat$eig[,1],type='b')
+```
+A partir de la 3; il aura donc 3 facteurs
+## Question 5 :
+```{r}
+plot(resultat,choix="var",axes=c(1,2))
+plot(resultat,choix="var",axes=c(1,3))
+```
+Le travail, le divertisement et le temps pour le 1er graphique <br>
+et le travail pour le 2ème graphique
+## Question 6 :
+```{r}
+plot(resultat,choix="ind",axes=c(1,2))
+plot(resultat,choix="ind",axes=c(1,3))
+```
